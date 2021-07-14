@@ -7,6 +7,8 @@ WORKDIR /usr/src/app/node-send-email
 # where available (npm@5+)
 COPY package*.json ./
 
+
+RUN npm config set registry https://registry.npm.taobao.org
 RUN npm i
 
 # Bundle app source

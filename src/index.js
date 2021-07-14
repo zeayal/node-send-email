@@ -17,10 +17,14 @@ console.log(envConfig.parsed)
 
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
+
+// 每隔 10 秒执行一次
+// rule.second = [0, 10, 20, 30, 40, 50]; 
+
 // 每小时30分执行
-// rule.minute = 11;
-// rule.second = 0;
-rule.second = [0, 10, 20, 30, 40, 50]; // 每隔 10 秒执行一次
+rule.minute = 30;
+rule.second = 0;
+
 
 const job = schedule.scheduleJob(rule, () => {
   getCoinPrirce({
