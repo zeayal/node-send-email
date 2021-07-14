@@ -1,0 +1,14 @@
+{
+  "name": "node-send-email",
+  "scripts": {
+    "build": "esbuild ./src/index.js --bundle --platform=node --target=node14.17.1 --outfile=./dist/index.js",
+    "dev": "esbuild ./src/index.js --bundle --platform=node --target=node14.17.1 --outfile=./dist/index.js --watch"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "esbuild": "^0.12.15",
+    "node-schedule": "^2.0.0",
+    "nodemailer": "^6.6.2"
+  }
+}
