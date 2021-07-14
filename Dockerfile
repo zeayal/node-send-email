@@ -14,6 +14,4 @@ COPY . .
 
 RUN npm install pm2 -g
 
-EXPOSE 80
-
 CMD ["pm2-runtime", "./src/index.js"]
