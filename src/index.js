@@ -60,7 +60,7 @@ async function getCoinPrirce(
         sendEmail({
           from: process.env.EMAIL_FORM,
           to: process.env.EMAIL_TO.split(","),
-          subject: `gmail提示-$${selectedCoin.quote.USD.price}`,
+          subject: `$${selectedCoin.quote.USD.price}`,
           text: `$${selectedCoin.quote.USD.price}`,
           html: `<b>$${selectedCoin.quote.USD.price}</b>`,
         }).catch(console.error);
