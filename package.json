@@ -3,7 +3,7 @@
   "scripts": {
     "build": "esbuild ./src/index.js --bundle --platform=node --target=node14.17.1 --outfile=./dist/index.js",
     "dev": "esbuild ./src/index.js --bundle --platform=node --target=node14.17.1 --outfile=./dist/index.js --watch",
-    "start": "pm2 start ./src/index.js --name app"
+    "start": "pm2 start ./src/index.js --name=app"
   },
   "dependencies": {
     "axios": "^0.21.1",

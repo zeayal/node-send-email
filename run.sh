@@ -7,4 +7,4 @@ docker image rm -f zeayal/node-send-email
 
 docker build . -t zeayal/node-send-email 
 
-docker run --name nodeEmail -p 49160:8080 -d zeayal/node-send-email 
+docker run --name=nodeEmail7 -p 49166:8080 -d zeayal/node-send-email 

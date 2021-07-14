@@ -61,8 +61,8 @@ async function getCoinPrirce(
           from: process.env.EMAIL_FORM,
           to: process.env.EMAIL_TO.split(","),
           subject: `gmail提示-$${selectedCoin.quote.USD.price}`,
-          text: `价格变动-$${selectedCoin.quote.USD.price}`,
-          html: `<b>当前价格$${selectedCoin.quote.USD.price}</b>`,
+          text: `$${selectedCoin.quote.USD.price}`,
+          html: `<b>$${selectedCoin.quote.USD.price}</b>`,
         }).catch(console.error);
       // }
     }
