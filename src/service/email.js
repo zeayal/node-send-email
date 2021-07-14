@@ -28,6 +28,7 @@ async function sendEmail(
     console.log("preview URL: %s", nodemailer.getTestMessageUrl(info));
   } catch (e) {
     console.log("发送邮件失败", Date.now(), e);
+    return Promise.reject(e);
   }
 }
 

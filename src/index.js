@@ -24,11 +24,15 @@ rule.minute = [0, 10, 20, 30, 40, 50];
 rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
+  startRequest();
+});
+
+const startRequest = () => {
   getCoinPrirce({
     coinId: "DOGE",
     expectedPrice: 0.4,
   });
-});
+}
 
 async function getCoinPrirce(
   { coinId, expectedPrice } = { coinId: "DOGE", expectedPrice: 0.3 }
@@ -63,14 +67,14 @@ async function getCoinPrirce(
           subject: `$${selectedCoin.quote.USD.price}`,
           text: `$${selectedCoin.quote.USD.price}`,
           html: `<b>$${selectedCoin.quote.USD.price}</b>`,
-        }).catch(console.error);
+        }).catch(e => {
+          console.error("发送邮件失败 error: ", e);
+          startRequest();
+        });
       // }
     }
   } catch (e) {
     console.log("请求失败， 接下来进行重试", e);
-    getCoinPrirce({
-      coinId: "DOGE",
-      expectedPrice: 0.4,
-    });
+    startRequest();
   }
 }
