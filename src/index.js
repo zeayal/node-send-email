@@ -51,10 +51,10 @@ async function getCoinPrirce(
       }
     );
     const coins = res.data ? res.data.data : {};
-    console.log("coins", coins);
+    // console.log("coins", coins);
     if (Array.isArray(coins)) {
       const selectedCoin = coins.find((item) => item.symbol === coinId);
-      console.log("selectedCoin", selectedCoin);
+      // console.log("selectedCoin", selectedCoin);
       if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
         // 发送邮件
         console.log("发送邮件", Date.now());
