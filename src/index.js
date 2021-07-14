@@ -19,11 +19,11 @@ console.log(envConfig.parsed)
 let rule = new schedule.RecurrenceRule();
 
 // 每隔 10 秒执行一次
-// rule.second = [0, 10, 20, 30, 40, 50]; 
+rule.second = [0, 10, 20, 30, 40, 50]; 
 
 // 每小时30分执行
-rule.minute = 30;
-rule.second = 0;
+// rule.minute = 30;
+// rule.second = 0;
 
 
 const job = schedule.scheduleJob(rule, () => {
