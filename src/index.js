@@ -17,11 +17,11 @@ for (const key in envConfig.parsed) {
 let rule = new schedule.RecurrenceRule();
 
 // 每隔 10 秒执行一次
-rule.second = [0, 10, 20, 30, 40, 50];
+// rule.second = [0, 10, 20, 30, 40, 50];
 
-// 每小时30分执行
-// rule.minute = 30;
-// rule.second = 0;
+// 每小时0分执行
+rule.minute = [0, 30];
+rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
   getCoinPrirce({
@@ -53,7 +53,8 @@ async function getCoinPrirce(
     if (Array.isArray(coins)) {
       const selectedCoin = coins.find((item) => item.symbol === coinId);
       // console.log("selectedCoin", selectedCoin);
-      if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
+      // 发送价格，测试服务稳定性
+      // if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
         // 发送邮件
         console.log("发送邮件", Date.now());
         sendEmail({
@@ -63,7 +64,7 @@ async function getCoinPrirce(
           text: `价格变动-$${selectedCoin.quote.USD.price}`,
           html: `<b>当前价格$${selectedCoin.quote.USD.price}</b>`,
         }).catch(console.error);
-      }
+      // }
     }
   } catch (e) {
     console.log("请求失败", e);
