@@ -16,17 +16,17 @@ for (const key in envConfig.parsed) {
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
 
-// 每隔 20 秒执行一次
-// rule.second = [0, 20, 40];
+// 每隔 60 秒执行一次
+rule.second = [0];
 
 // 每小时0分和30分执行
-rule.minute = [0, 30];
-rule.second = 0;
+// rule.minute = [0, 30];
+// rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
   getCoinPrirce({
     coinId: "DOGE",
-    expectedPrice: 0.1,
+    expectedPrice: 0.4,
   });
 });
 
@@ -44,7 +44,7 @@ async function getCoinPrirce(
         },
         params: {
           start: 1,
-          limit: 10
+          limit: 20
         }
       }
     );
@@ -67,6 +67,10 @@ async function getCoinPrirce(
       // }
     }
   } catch (e) {
-    console.log("请求失败", e);
+    console.log("请求失败， 接下来进行重试", e);
+    getCoinPrirce({
+      coinId: "DOGE",
+      expectedPrice: 0.4,
+    });
   }
 }
