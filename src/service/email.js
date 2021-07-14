@@ -14,7 +14,7 @@ async function sendEmail(
   const emailConfig = {
     host: process.env.EMAIL_SMTP_HOST,
     port: process.env.EMAIL_SMTP_PORT,
-    secure: process.env.EMAIL_SMTP_SECURE,
+    secure: Boolean(process.env.EMAIL_SMTP_SECURE === 'true'),
     auth: {
       user: process.env.EMAIL_SMTP_AUTH_USERNAME,
       pass: process.env.EMAIL_SMTP_AUTH_PASSWORD,
