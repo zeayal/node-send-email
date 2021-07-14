@@ -18,4 +18,4 @@ RUN npm install pm2 -g
 
 EXPOSE 8080
 
-CMD ["pm2-runtime", "./src/index.js"]
+CMD ["pm2", "start ./src/index.js --name app"]

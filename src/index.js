@@ -16,12 +16,12 @@ for (const key in envConfig.parsed) {
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
 
-// 每隔 10 秒执行一次
-// rule.second = [0, 10, 20, 30, 40, 50];
+// 每隔 20 秒执行一次
+rule.second = [0, 20, 40];
 
 // 每小时0分执行
-rule.minute = [0, 30];
-rule.second = 0;
+// rule.minute = [0, 30];
+// rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
   getCoinPrirce({
