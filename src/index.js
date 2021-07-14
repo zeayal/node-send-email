@@ -56,7 +56,7 @@ async function getCoinPrirce(
       // 发送价格，测试服务稳定性
       // if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
         // 发送邮件
-        console.log("发送邮件", Date.now());
+        console.log("发送邮件", Date.now(), selectedCoin);
         sendEmail({
           from: process.env.EMAIL_FORM,
           to: process.env.EMAIL_TO.split(","),
