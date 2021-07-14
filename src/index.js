@@ -13,8 +13,6 @@ for (const key in envConfig.parsed) {
   process.env[key] = envConfig.parsed[key];
 }
 
-console.log('envConfig.parsed', envConfig.parsed);
-
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
 

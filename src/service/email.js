@@ -20,7 +20,7 @@ async function sendEmail(
       pass: process.env.EMAIL_SMTP_AUTH_PASSWORD,
     },
   };
-  console.log("emailConfig", emailConfig);
+//   console.log("emailConfig", emailConfig);
   let transporter = nodemailer.createTransport(emailConfig);
 
   let info = await transporter.sendMail(mailOptions);
