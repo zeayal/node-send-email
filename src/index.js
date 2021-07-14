@@ -17,11 +17,11 @@ for (const key in envConfig.parsed) {
 let rule = new schedule.RecurrenceRule();
 
 // 每隔 20 秒执行一次
-rule.second = [0, 20, 40];
+// rule.second = [0, 20, 40];
 
-// 每小时0分执行
-// rule.minute = [0, 30];
-// rule.second = 0;
+// 每小时0分和30分执行
+rule.minute = [0, 30];
+rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
   getCoinPrirce({
