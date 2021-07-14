@@ -20,7 +20,7 @@ let rule = new schedule.RecurrenceRule();
 // rule.second = [0];
 
 // 每小时30分执行
-rule.minute = 30;
+rule.minute = [0, 10, 20, 30, 40, 50];
 rule.second = 0;
 
 const job = schedule.scheduleJob(rule, () => {
