@@ -10,12 +10,11 @@ COPY package*.json ./
 
 RUN npm config set registry https://registry.npm.taobao.org
 RUN npm i
-
 # Bundle app source
 COPY . .
 
-RUN npm install pm2 -g
+RUN npm i pm2 -g
 
 EXPOSE 8080
 
-CMD ["pm2", "start ./src/index.js --name app"]
+CMD ["npm", "run", "start"]
