@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-console.log('process.env.EMAIL_SMTP_HOST 2', process.env.EMAIL_SMTP_HOST);
+
 async function sendEmail(
   mailOptions = {
     from: "Sender Name <sender@server.com>",
@@ -9,6 +9,8 @@ async function sendEmail(
     html: "<b>Hello world html</b>",
   }
 ) {
+
+  console.log("process.env 2", process.env);
   // let testAccount = await nodemailer.createTestAccount();
   // create reusable transporter object using the default transport
   const emailConfig = {

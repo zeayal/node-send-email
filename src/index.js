@@ -11,7 +11,7 @@ for (const key in envConfig.parsed) {
 const schedule = require("node-schedule");
 const axios = require("axios");
 
-console.log("process.env.EMAIL_SMTP_HOST", process.env.EMAIL_SMTP_HOST);
+console.log("process.env 1", process.env);
 
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
@@ -37,7 +37,7 @@ const startRequest = () => {
   });
 };
 
-startRequest();
+await startRequest();
 
 async function getCoinPrirce({ coinId, expectedPrice }) {
   const timestemp = Date.now();
@@ -76,7 +76,7 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
       // if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
       // 发送邮件
       logger.info("请求到价格", coinId, current_price_usd);
-      sendEmail({
+      await sendEmail({
         from: process.env.EMAIL_FORM,
         to: process.env.EMAIL_TO.split(","),
         subject: `${coinId}-${current_price_usd}`,
