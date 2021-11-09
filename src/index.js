@@ -1,9 +1,10 @@
-require('dotenv').config()
+const path = require("path");
+console.log(path.join(__dirname + "/../.env"))
+require("dotenv").config({ path: path.join(__dirname + "/../.env") });
 const schedule = require("node-schedule");
 const axios = require("axios");
 
-
-console.log('process.env.EMAIL_SMTP_HOST', process.env.EMAIL_SMTP_HOST);
+console.log("process.env.EMAIL_SMTP_HOST", process.env.EMAIL_SMTP_HOST);
 
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
