@@ -1,11 +1,11 @@
 const schedule = require("node-schedule");
 const axios = require("axios");
 const dotenv = require("dotenv");
+const envConfig = dotenv.config(); // 加载环境变量
+
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
 
-// 加载环境变量
-const envConfig = dotenv.config();
 if (envConfig.error) {
   throw envConfig.error;
 }
