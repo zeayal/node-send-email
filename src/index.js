@@ -2,6 +2,7 @@ const schedule = require("node-schedule");
 const axios = require("axios");
 const dotenv = require("dotenv");
 const { sendEmail } = require("./service/email");
+const logger = require("./service/logger");
 
 // 加载环境变量
 const envConfig = dotenv.config();
@@ -37,7 +38,6 @@ const startRequest = () => {
 startRequest();
 
 async function getCoinPrirce({ coinId, expectedPrice }) {
-  console.log(Date.now(), coinId, expectedPrice);
   const timestemp = Date.now();
   const CONTRACT =
     process.env.CONTRACT || "0x882c173bc7ff3b7786ca16dfed3dfffb9ee7847b";
@@ -45,6 +45,7 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
 
   try {
     const url = `https://avedex.cc/v1api/v1/tokens/${CONTRACT}-${CHAIN}`;
+    logger.info("发送请求", coinId, url);
     const res = await axios.get(`${url}?t=${timestemp}`, {
       headers: {
         "sec-ch-ua": `"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"`,
@@ -65,19 +66,14 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
       },
     });
     const token = res?.data?.token || {};
-    // console.log("data", data);
+
     if (token?.current_price_usd) {
       const { current_price_usd } = token || {};
       // console.log("selectedCoin", selectedCoin);
       // 发送价格，测试服务稳定性
       // if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
       // 发送邮件
-      console.log(
-        "发送邮件",
-        process.env.EMAIL_FORM,
-        Date.now(),
-        current_price_usd
-      );
+      logger.info("请求到价格", coinId, current_price_usd);
       sendEmail({
         from: process.env.EMAIL_FORM,
         to: process.env.EMAIL_TO.split(","),
@@ -86,13 +82,15 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
         html: `<b>$${current_price_usd}</b>`,
       }).catch((e) => {
         console.log(Date.now(), "发送邮件失败， 10分钟后进行重试", e);
+        logger.error("发送邮件失败，10分钟后进行重试", coinId, e);
         setTimeout(() => startRequest(), 6000 * 10);
       });
     } else {
-      console.log(Date.now(), "未查询到价格：res?.data", res?.data);
+      logger.error("未查询到价格，10分钟后进行重试", coinId);
+      setTimeout(() => startRequest(), 6000 * 10);
     }
   } catch (e) {
-    console.log(Date.now(), "请求失败， 10分钟后进行重试", e);
+    logger.error("axios 请求失败， 10分钟后进行重试", e);
     setTimeout(() => startRequest(), 6000 * 10);
   }
 }
