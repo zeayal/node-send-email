@@ -1,6 +1,6 @@
 const winston = require("winston");
-const { winston } = winston;
-const format = winston.createLogger({
+const { format } = winston;
+const logger = winston.createLogger({
   level: "info",
   format: format.combine(format.timestamp(), format.json()),
   defaultMeta: { service: "user-service" },
