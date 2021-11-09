@@ -37,7 +37,7 @@ const startRequest = () => {
   });
 };
 
-await startRequest();
+startRequest();
 
 async function getCoinPrirce({ coinId, expectedPrice }) {
   const timestemp = Date.now();
