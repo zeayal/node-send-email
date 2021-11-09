@@ -1,6 +1,13 @@
 const path = require("path");
-console.log(path.join(__dirname + "/../.env"))
-require("dotenv").config({ path: path.join(__dirname + "/../.env") });
+console.log(path.join(__dirname + "/../.env"));
+const envConfig = require("dotenv").config({
+  path: path.join(__dirname + "/../.env"),
+});
+
+for (const key in envConfig.parsed) {
+  process.env[key] = envConfig.parsed[key];
+}
+
 const schedule = require("node-schedule");
 const axios = require("axios");
 
@@ -8,10 +15,6 @@ console.log("process.env.EMAIL_SMTP_HOST", process.env.EMAIL_SMTP_HOST);
 
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
-
-// for (const key in envConfig.parsed) {
-//   process.env[key] = envConfig.parsed[key];
-// }
 
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
