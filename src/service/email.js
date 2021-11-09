@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-
+console.log('process.env.EMAIL_SMTP_HOST 2', process.env.EMAIL_SMTP_HOST);
 async function sendEmail(
   mailOptions = {
     from: "Sender Name <sender@server.com>",

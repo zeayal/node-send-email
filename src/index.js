@@ -3,6 +3,8 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 const envConfig = dotenv.config(); // 加载环境变量
 
+console.log('process.env.EMAIL_SMTP_HOST', process.env.EMAIL_SMTP_HOST);
+
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
 
