@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const logger = require("./logger");
 
 async function sendEmail(
   mailOptions = {
@@ -9,8 +10,6 @@ async function sendEmail(
     html: "<b>Hello world html</b>",
   }
 ) {
-
-  console.log("process.env 2", process.env);
   // let testAccount = await nodemailer.createTestAccount();
   // create reusable transporter object using the default transport
   const emailConfig = {
@@ -22,14 +21,12 @@ async function sendEmail(
       pass: process.env.EMAIL_SMTP_AUTH_PASSWORD,
     },
   };
-  console.log("emailConfig", emailConfig);
+  logger.info(JSON.stringify({ emailConfig }));
   let transporter = nodemailer.createTransport(emailConfig);
   try {
     let info = await transporter.sendMail(mailOptions);
-    console.log("message sent: s%", info.messageId);
-    console.log("preview URL: %s", nodemailer.getTestMessageUrl(info));
+    logger.info(JSON.stringify({ info }));
   } catch (e) {
-    console.log("发送邮件失败", Date.now(), e);
     return Promise.reject(e);
   }
 }

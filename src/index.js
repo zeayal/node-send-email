@@ -47,7 +47,7 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
 
   try {
     const url = `https://avedex.cc/v1api/v1/tokens/${CONTRACT}-${CHAIN}`;
-    logger.info("发送请求", coinId, url);
+    logger.info(`"发送请求": ${JSON.stringify({ coinId, url })}`);
     const res = await axios.get(`${url}?t=${timestemp}`, {
       headers: {
         "sec-ch-ua": `"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"`,
@@ -75,7 +75,7 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
       // 发送价格，测试服务稳定性
       // if (selectedCoin && selectedCoin.quote.USD.price >= expectedPrice) {
       // 发送邮件
-      logger.info("请求到价格", coinId, current_price_usd);
+      logger.info(`当前价格: ${JSON.stringify({ coinId, current_price_usd })}`);
       await sendEmail({
         from: process.env.EMAIL_FORM,
         to: process.env.EMAIL_TO.split(","),
@@ -84,15 +84,20 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
         html: `<b>$${current_price_usd}</b>`,
       }).catch((e) => {
         console.log(Date.now(), "发送邮件失败， 10分钟后进行重试", e);
-        logger.error("发送邮件失败，10分钟后进行重试", coinId, e);
+        logger.error(
+          `发送邮件失败，10分钟后进行重试: ${JSON.stringify({ coinId, e })}`
+        );
         setTimeout(() => startRequest(), 6000 * 10);
       });
     } else {
-      logger.error("未查询到价格，10分钟后进行重试", coinId);
+      logger.error(
+        `未查询到价格，10分钟后进行重试:
+        ${JSON.stringify({ coinId })}`
+      );
       setTimeout(() => startRequest(), 6000 * 10);
     }
   } catch (e) {
-    logger.error("axios 请求失败， 10分钟后进行重试", e);
+    logger.error(`axios 请求失败， 10分钟后进行重试:${JSON.stringify(e)}`);
     setTimeout(() => startRequest(), 6000 * 10);
   }
 }
