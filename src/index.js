@@ -1,20 +1,16 @@
+require('dotenv').config()
 const schedule = require("node-schedule");
 const axios = require("axios");
-const dotenv = require("dotenv");
-const envConfig = dotenv.config(); // 加载环境变量
+
 
 console.log('process.env.EMAIL_SMTP_HOST', process.env.EMAIL_SMTP_HOST);
 
 const { sendEmail } = require("./service/email");
 const logger = require("./service/logger");
 
-if (envConfig.error) {
-  throw envConfig.error;
-}
-
-for (const key in envConfig.parsed) {
-  process.env[key] = envConfig.parsed[key];
-}
+// for (const key in envConfig.parsed) {
+//   process.env[key] = envConfig.parsed[key];
+// }
 
 // 定时执行规则 https://segmentfault.com/a/1190000022455361
 let rule = new schedule.RecurrenceRule();
