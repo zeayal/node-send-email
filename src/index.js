@@ -63,8 +63,9 @@ async function getCoinPrirce({ coinId, expectedPrice }) {
         "Accept-Encoding": "gzip, deflate, br",
         "Accept-Language":
           "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6,ja;q=0.5",
+        Authorization: "a55303b41ff387d6f410de3ff6179721b4d690e01636968377321",
         Cookie:
-          "_ga=GA1.1.1561920205.1635414544; _ga_LFKW8KRD0V=GS1.1.1636421584.8.0.1636421584.0",
+          "Cookie: _ga=GA1.1.1561920205.1635414544; _ga_LFKW8KRD0V=GS1.1.1636968341.17.1.1636968377.0",
       },
     });
     const token = res?.data?.token || {};
