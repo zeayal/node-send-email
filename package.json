@@ -2,7 +2,7 @@
   "name": "node-send-email",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
-    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --name=app"
+    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --name=email"
   },
   "dependencies": {
     "axios": "^0.21.1",
